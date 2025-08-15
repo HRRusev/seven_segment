@@ -1,6 +1,6 @@
 # 7-Segment Display Library for STM32
 
-A library to dinamic control a 7-segment display on STM32 micricontroers.
+A library to dynamic control a 7-segment display on STM32 micricontroers.
 
 ![image](example/sevensegment.jpg)
 
