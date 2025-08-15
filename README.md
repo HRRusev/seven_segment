@@ -2,6 +2,8 @@
 
 A library to dinamic control a 7-segment display on STM32 micricontroers.
 
+![image](example/sevensegment.jpg)
+
 ## Basic Usage
 
 
