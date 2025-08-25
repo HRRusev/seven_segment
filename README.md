@@ -92,7 +92,7 @@ Refresh frequency have to be around 100 Hz per digit. In this examples use timer
 In main.cpp
 ```c
 /* USER CODE BEGIN 2 */
-//Start the Timer TIM3 in Interrupt mode
+//Start the Timer TIM2 in Interrupt mode
 if (HAL_TIM_Base_Start_IT(&htim2) != HAL_OK)
 {
   /* Starting Error */
