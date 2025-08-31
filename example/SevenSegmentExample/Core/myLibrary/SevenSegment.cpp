@@ -165,19 +165,19 @@ void SevenSegment::floatToString(float number)
 	if(isNegative) { integerPart = - integerPart; }
 	char integerStr[16];
 	uint8_t integerPlaces = this->intToString(integerPart, integerStr);
+	uint8_t i = 0;
+	//Display integer parts
+	while(i < integerPlaces)
+	{
+		this->buffer[i] = integerStr[i];
+		i++;
+	}
 
-	if(integerPlaces < this->numberDigits)
+	if(i < this->numberDigits)
 	{
 		int intFractionalPart = (int)(fractionalPart * powersOf10[this->numberDigits - integerPlaces]);
 		char fractionalStr[16];
 		this->intToString(intFractionalPart, fractionalStr);
-
-		uint8_t i = 0;
-		while(i < integerPlaces)
-		{
-			this->buffer[i] = integerStr[i];
-			i++;
-		}
 
 		this->buffer[i++] = '.';
 		uint8_t k = 0;
@@ -186,13 +186,10 @@ void SevenSegment::floatToString(float number)
 			this->buffer[i] = fractionalStr[k];
 			i++; k++;
 		}
-
-
-		 // Add newline
-		 this->buffer[i++] = '\n';
 	}
-
-
+	
+	 // Add newline
+	 this->buffer[i] = '\n';
 
 }
 
