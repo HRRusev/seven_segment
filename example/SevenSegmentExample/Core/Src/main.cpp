@@ -45,7 +45,7 @@ TIM_HandleTypeDef htim10;
 TIM_HandleTypeDef htim11;
 
 /* USER CODE BEGIN PV */
-volatile bool displayRefresh = false;
+volatile SevenSegment *pDisplay = nullptr;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -97,13 +97,6 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 
-  //Start the Timer TIM3 in Interrupt mode
-	if (HAL_TIM_Base_Start_IT(&htim2) != HAL_OK)
-	{
-	  /* Starting Error */
-	  Error_Handler();
-	}
-
 	//Seven segment initialize
 	SevenSegment display;
 
@@ -135,8 +128,17 @@ int main(void)
 	segDig[2].pin = digHundreds_Pin;
 
 	display.intilization(segPin, segDig, 3, true);
+	pDisplay = &display;
 
- 	//display.setNumber(-3);
+
+	//Start the Timer TIM2 in Interrupt mode
+	  if (HAL_TIM_Base_Start_IT(&htim2) != HAL_OK)
+	  {
+	    /* Starting Error */
+	    Error_Handler();
+	  }
+
+	//display.setNumber(-3);
  	//display.setNumberF(1.5);
  	//display.message("FFF");
  	display << "tEh";
@@ -148,11 +150,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  if (displayRefresh)
-	  {
-		  display.refreshDisplay();
-		  displayRefresh = false;
-	  }
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

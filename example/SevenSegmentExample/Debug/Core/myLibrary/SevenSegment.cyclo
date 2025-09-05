@@ -1,16 +1,16 @@
 ../Core/myLibrary/SevenSegment.cpp:10:1:SevenSegment::SevenSegment()	1
 ../Core/myLibrary/SevenSegment.cpp:15:1:SevenSegment::SevenSegment(const segmentsPin (&)[8], const segmentDigit*, uint8_t, bool)	1
 ../Core/myLibrary/SevenSegment.cpp:28:6:void SevenSegment::intilization(const segmentsPin (&)[8], const segmentDigit*, uint8_t, bool)	1
-../Core/myLibrary/SevenSegment.cpp:40:6:bool SevenSegment::message(const char*)	13
-../Core/myLibrary/SevenSegment.cpp:78:9:uint8_t SevenSegment::intToString(int)	8
-../Core/myLibrary/SevenSegment.cpp:125:9:uint8_t SevenSegment::intToString(int, char (&)[16])	6
-../Core/myLibrary/SevenSegment.cpp:156:6:void SevenSegment::floatToString(float)	6
-../Core/myLibrary/SevenSegment.cpp:199:6:bool SevenSegment::setNumber(int32_t)	4
-../Core/myLibrary/SevenSegment.cpp:221:6:bool SevenSegment::setNumberF(float)	3
-../Core/myLibrary/SevenSegment.cpp:237:6:void SevenSegment::setDash()	2
-../Core/myLibrary/SevenSegment.cpp:244:6:void SevenSegment::refreshDisplay()	2
-../Core/myLibrary/SevenSegment.cpp:257:6:void SevenSegment::loadSymbol()	3
-../Core/myLibrary/SevenSegment.cpp:272:6:void SevenSegment::segmentON()	2
-../Core/myLibrary/SevenSegment.cpp:281:6:void SevenSegment::segmentOFF()	2
-../Core/myLibrary/SevenSegment.cpp:290:6:void SevenSegment::operator<<(const char*)	9
-../Core/myLibrary/SevenSegment.cpp:337:1:SevenSegment::~SevenSegment()	3
+../Core/myLibrary/SevenSegment.cpp:41:6:bool SevenSegment::message(const char*)	13
+../Core/myLibrary/SevenSegment.cpp:79:9:uint8_t SevenSegment::intToString(int)	8
+../Core/myLibrary/SevenSegment.cpp:126:9:uint8_t SevenSegment::intToString(int, char (&)[16])	6
+../Core/myLibrary/SevenSegment.cpp:157:6:void SevenSegment::floatToString(float)	6
+../Core/myLibrary/SevenSegment.cpp:196:6:bool SevenSegment::setNumber(int32_t)	4
+../Core/myLibrary/SevenSegment.cpp:218:6:bool SevenSegment::setNumberF(float)	3
+../Core/myLibrary/SevenSegment.cpp:234:6:void SevenSegment::setDash()	2
+../Core/myLibrary/SevenSegment.cpp:241:6:void SevenSegment::refreshDisplay() volatile	2
+../Core/myLibrary/SevenSegment.cpp:254:6:void SevenSegment::loadSymbol() volatile	3
+../Core/myLibrary/SevenSegment.cpp:269:6:void SevenSegment::segmentON() volatile	2
+../Core/myLibrary/SevenSegment.cpp:278:6:void SevenSegment::segmentOFF() volatile	2
+../Core/myLibrary/SevenSegment.cpp:287:6:void SevenSegment::operator<<(const char*)	9
+../Core/myLibrary/SevenSegment.cpp:334:1:SevenSegment::~SevenSegment()	3

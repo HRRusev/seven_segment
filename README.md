@@ -17,7 +17,7 @@ Include heder file
 Declaration on global variable
 ```c
 /* USER CODE BEGIN PV */
-volatile bool displayRefresh = false;
+volatile SevenSegment *pDisplay = nullptr;
 
 /* USER CODE END PV */
 ```
@@ -76,16 +76,6 @@ display.message("FFF");
 display << "tEh";
 ```
 
-Reflesh segments (in while)
-```c
-if (displayRefresh)
-{
-    display.refreshDisplay();
-    displayRefresh = false;
-}
-/* USER CODE END WHILE */
-```
-
 ## Set frequency for refresh seven segments
 Refresh frequency have to be around 100 Hz per digit. In this examples use timer 2.
 
@@ -108,12 +98,13 @@ Include heder file on the class
 #include "../myLibrary/Inc/SevenSegment.h"
 /* USER CODE END Includes */
 ```
-In function void TIM2_IRQHandler(void) set variable for refresh segment
+In function void TIM2_IRQHandler(void) refresh segment
 ```c
 void TIM2_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM2_IRQn 1 */
-  displayRefresh = true;
+    if(pDisplay != nullptr)
+  	  pDisplay->refreshDisplay();
   /* USER CODE END TIM2_IRQn 1 */
 }
 ```

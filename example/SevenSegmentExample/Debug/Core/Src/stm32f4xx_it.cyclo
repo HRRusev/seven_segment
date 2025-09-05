@@ -7,4 +7,4 @@
 ../Core/Src/stm32f4xx_it.cpp:158:6:void DebugMon_Handler()	1
 ../Core/Src/stm32f4xx_it.cpp:171:6:void PendSV_Handler()	1
 ../Core/Src/stm32f4xx_it.cpp:184:6:void SysTick_Handler()	1
-../Core/Src/stm32f4xx_it.cpp:205:6:void TIM2_IRQHandler()	1
+../Core/Src/stm32f4xx_it.cpp:205:6:void TIM2_IRQHandler()	2

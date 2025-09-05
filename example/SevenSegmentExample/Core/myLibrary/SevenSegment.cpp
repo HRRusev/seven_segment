@@ -37,6 +37,7 @@ void SevenSegment::intilization(const segmentsPin (&pins)[8], const segmentDigit
 	symbolCodes = new char[numberDigits];
 	buffer = new char[(2*numberDigits)+1];
 }
+
 bool SevenSegment::message(const char *str)
 {
 	uint8_t strIdx = 0;
@@ -187,10 +188,9 @@ void SevenSegment::floatToString(float number)
 			i++; k++;
 		}
 	}
-	
+
 	 // Add newline
 	 this->buffer[i] = '\n';
-
 }
 
 bool SevenSegment::setNumber(int32_t number)
@@ -238,7 +238,7 @@ void SevenSegment::setDash(void)
 }
 
 
-void SevenSegment::refreshDisplay(void)
+void SevenSegment::refreshDisplay(void) volatile
 {
 
 	this->segmentOFF();
@@ -251,7 +251,7 @@ void SevenSegment::refreshDisplay(void)
 	this->segmentON();
 }
 
-void SevenSegment::loadSymbol(void)
+void SevenSegment::loadSymbol(void) volatile
 {
 	char symbol = *(this->symbolCodes + this->position);
 
@@ -266,7 +266,7 @@ void SevenSegment::loadSymbol(void)
 
 }
 
-void SevenSegment::segmentON(void)
+void SevenSegment::segmentON(void) volatile
 {
 	uint8_t idx = this->numberDigits - 1 - this->position;
 	if(this->commonCathode)
@@ -275,7 +275,7 @@ void SevenSegment::segmentON(void)
 		HAL_GPIO_WritePin(this->digitsPin[idx].port, this->digitsPin[idx].pin, GPIO_PIN_RESET);
 }
 
-void SevenSegment::segmentOFF(void)
+void SevenSegment::segmentOFF(void) volatile
 {
 	uint8_t idx = this->numberDigits - 1 - this->position;
 	if(this->commonCathode)

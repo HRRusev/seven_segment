@@ -23,8 +23,6 @@
 #include <cstdint>
 #include "stm32f4xx_hal.h"
 
-extern volatile bool displayRefresh;
-
 typedef struct{
 	GPIO_TypeDef* 	port;
 	uint16_t 		pin;
@@ -94,14 +92,13 @@ static const uint32_t powersOf10[] =
 	1000000	//10^7
 };
 
-
-
 class SevenSegment {
 
 public:
 	SevenSegment();
 	SevenSegment(const segmentsPin (&pins)[8], const segmentDigit *digits, uint8_t segmentDigits_, bool commonCathode_);
 	void intilization(const segmentsPin (&pins)[8], const segmentDigit *digits, uint8_t segmentDigits_, bool commonCathode_);
+	static SevenSegment* getInstance();
 	~SevenSegment();
 	bool message(const char *str);
 
@@ -109,7 +106,7 @@ public:
 	bool setNumber(int32_t number);
 	bool setNumberF(float numberF);
 
-	void refreshDisplay();
+	void refreshDisplay() volatile;
 
 	void operator<<(const char *str);
 
@@ -125,16 +122,14 @@ private:
 	char					*buffer;
 	char					*symbolCodes; 				// The active setting of each segment of each digit
 
-	void segmentON(void);
-	void segmentOFF(void);
-	void loadSymbol(void);
+	void segmentON(void) volatile;
+	void segmentOFF(void) volatile;
+	void loadSymbol(void) volatile;
 	uint8_t intToString(int number);
 	uint8_t intToString(int number, char (&pins)[16]);
 	void floatToString(float number);
-
-
-
-
 };
+
+extern volatile SevenSegment *pDisplay;
 
 #endif /* MYLIBRARY_SEVENSEGMENT_H_ */
