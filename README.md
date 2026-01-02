@@ -88,6 +88,7 @@ if (HAL_TIM_Base_Start_IT(&htim2) != HAL_OK)
   /* Starting Error */
   Error_Handler();
 }
+HAL_NVIC_SetPriority(TIM2_IRQn, 1, 0);
 ```
 
 In stm32f4xx_it.cpp 
