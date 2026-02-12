@@ -4,27 +4,37 @@
  *  Created on: May 15, 2025
  *      Author: eng. Hristian Rusev
  */
+
 #ifndef MYLIBRARY_SEVENSEGMENT_H_
 #define MYLIBRARY_SEVENSEGMENT_H_
+
 #define SEVENSEGMENT_LIB_VERSION "1.1"
-#define MAXNUMDIGITS     8
-#define BLANK_IDX        36
-#define DASH_IDX        37
-#define DOT_IDX            38
-#define ASTERISK_IDX    39
-#define UNDERSCORE_IDX    40
+
+#define MAXNUMDIGITS 	8
+#define BLANK_IDX		36
+#define DASH_IDX		37
+#define DOT_IDX			38
+#define ASTERISK_IDX	39
+#define UNDERSCORE_IDX	40
+
+
 #include <string.h>
 #include <cstdio>
 #include <cstdint>
 #include "stm32f4xx_hal.h"
+
 typedef struct{
-  GPIO_TypeDef*     port;
-  uint16_t         pin;
+  GPIO_TypeDef* 	port;
+  uint16_t 		pin;
 }segmentDigit;
+
 typedef struct{
-  GPIO_TypeDef*     port;
-  int16_t         pin;
+  GPIO_TypeDef* 	port;
+  int16_t 		pin;
 }segmentsPin;
+
+
+
 static const uint8_t digitCodeMap[] = {
   // GFEDCBA  Segments      7-segment map:
   0b00111111, // 0   "0"          AAA
@@ -69,17 +79,21 @@ static const uint8_t digitCodeMap[] = {
   0b01100011, // 42 '*'   ASTERISK
   0b00001000, // 95 '_'   UNDERSCORE
 };
+
+
 static const uint32_t powersOf10[] =
 {
-  1,        //10^0
-  10,        //10^2
-  100,    //10^3
-  1000,    //10^4
-  10000,     //10^5
-  100000,    //10^6
-  1000000    //10^7
+  1,		//10^0
+  10,		//10^2
+  100,	//10^3
+  1000,	//10^4
+  10000, 	//10^5
+  100000,	//10^6
+  1000000	//10^7
 };
+
 class SevenSegment {
+
 public:
   SevenSegment();
   SevenSegment(const segmentsPin (&pins)[8], const segmentDigit *digits, uint8_t segmentDigits_, bool commonCathode_);
@@ -87,29 +101,41 @@ public:
   static SevenSegment* getInstance();
   ~SevenSegment();
   bool message(const char *str);
+
   void setDash(void);
   bool setNumber(int32_t number);
-  bool setNumberF(float numberF);
+  int8_t setNumberF(float numberF);
+  bool setNumberF_units(float numberF);
   void setOFF(bool displayOFF);
+
   bool getOFF() const;
+
   void refreshDisplay() volatile;
+
   void operator<<(const char *str);
+
+
+
 private:
-  const segmentsPin         *segmentPin;            //Seven segment ports and pins
-  const segmentDigit        *digitsPin;                //Digits ports and pins
-  uint8_t                 numberDigits;
-  bool                     commonCathode;
-  bool                     off;
-  uint8_t                    position;
-  uint8_t                    bufferIndex;
-  char                    *buffer;
-  char                    *symbolCodes;                 // The active setting of each segment of each digit
+  const segmentsPin 		*segmentPin;			//Seven segment ports and pins
+  const segmentDigit		*digitsPin;				//Digits ports and pins
+  uint8_t 				numberDigits;
+  bool 					commonCathode;
+  bool 					off;
+  uint8_t					position;
+  uint8_t					bufferIndex;
+  char					*buffer;
+  char					*symbolCodes; 				// The active setting of each segment of each digit
+
   void segmentON(void) volatile;
   void segmentOFF(void) volatile;
   void loadSymbol(void) volatile;
+  int8_t setNumberFloat(float numberF);
   uint8_t intToString(int number);
   uint8_t intToString(int number, char (&pins)[16]);
-  void floatToString(float number);
+  uint8_t floatToString(float number);
 };
+
 extern volatile SevenSegment *pDisplay;
+
 #endif /* MYLIBRARY_SEVENSEGMENT_H_ */

@@ -137,6 +137,7 @@ int main(void)
 	    /* Starting Error */
 	    Error_Handler();
 	  }
+	  HAL_NVIC_SetPriority(TIM2_IRQn, 1, 0);
 
 	//display.setNumber(-3);
  	//display.setNumberF(1.5);
